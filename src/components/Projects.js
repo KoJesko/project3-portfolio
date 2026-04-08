@@ -9,7 +9,7 @@ const projects = [
     subtitle: 'intentioned.tech',
     link: 'https://intentioned.tech',
     description:
-      'A highly adaptable, logic-driven training platform. Designed and developed modular career training software built to simulate and grade any conversation. This is not a VR gimmick; it is a straightforward, highly functional tool built to objectively assess and improve dialogue and professional interaction.',
+      'A highly adaptable, logic-driven training platform. Designed and developed modular career training software built to simulate and grade any conversation. It is highly functional tool built to objectively assess and improve dialogue and professional interaction.',
   },
   {
     title: 'TidalHudson',
