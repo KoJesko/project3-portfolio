@@ -17,7 +17,7 @@ function About() {
             I value the traditional, fundamental ways systems are built, but I am always
             looking for the innovative optimization that pushes them forward. When I am
             not compiling code or troubleshooting a Linux kernel, I am likely
-             gaming or playing the electric bass.
+            gaming or playing the electric bass.
             I tell it exactly like it is, and I build systems that work.
           </p>
         </div>
