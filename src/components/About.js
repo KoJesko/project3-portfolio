@@ -9,18 +9,16 @@ function About() {
         <div className="about-content">
           <p>
             I am a Computer Science Senior at Pace University who believes in owning my
-            hardware and my software. I don't just write code; I am a hardline advocate
-            for Free and Open-Source Software (FOSS) and the Right to Repair. I fix my
-            own devices, build custom rigs from the ground up, and configure my
+            I am a hardline advocate for Free and Open-Source Software (FOSS)
+            and the Right to Repair. I fix my own devices, build custom rigs from the ground up, and configure my
             environments precisely how I want them.
           </p>
           <p>
             I value the traditional, fundamental ways systems are built, but I am always
             looking for the innovative optimization that pushes them forward. When I am
-            not compiling code or troubleshooting a Linux kernel, I am broadcasting my
-            perspectives as the host of <strong>Different with Ari Kotler</strong> on
-            Sleepy Hollow Radio or optimizing logistics in complex simulation
-            environments. I tell it exactly like it is, and I build systems that work.
+            not compiling code or troubleshooting a Linux kernel, I am likely
+             gaming or playing the electric bass.
+            I tell it exactly like it is, and I build systems that work.
           </p>
         </div>
       </div>
