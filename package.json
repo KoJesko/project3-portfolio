@@ -31,7 +31,8 @@
     "@tootallnate/once": "^3.0.1",
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31",
-    "underscore": "^1.13.8"
+    "underscore": "^1.13.8",
+    "typescript": "^4.9.5"
   },
   "browserslist": {
     "production": [
