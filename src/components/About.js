@@ -22,6 +22,7 @@ function About() {
           </p>
           <p>
             If you want to catch me on my socials, my alias online is almost always KoJesko.
+          </p>
         </div>
       </div>
     </section>
