@@ -20,6 +20,8 @@ function About() {
             gaming or playing the electric bass.
             I tell it exactly like it is, and I build systems that work.
           </p>
+          <p>
+            If you want to catch me on my socials, my alias online is almost always KoJesko.
         </div>
       </div>
     </section>
