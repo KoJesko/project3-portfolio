@@ -438,8 +438,4 @@ body {
   .section {
     padding: 60px 0;
   }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
 }
