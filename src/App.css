@@ -290,9 +290,15 @@ body {
 /* ─── Skills ─── */
 
 .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+}
+
+.skills-grid > .card {
+  flex: 0 1 calc((100% - 40px) / 3);
+  min-width: min(100%, 280px);
 }
 
 .skill-list {
@@ -329,9 +335,15 @@ body {
 /* ─── Pride ─── */
 
 .pride-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+}
+
+.pride-grid > .card {
+  flex: 0 1 calc((100% - 40px) / 3);
+  min-width: min(100%, 280px);
 }
 
 /* ─── Contact ─── */
