@@ -12,6 +12,13 @@ const projects = [
       'A highly adaptable, logic-driven training platform. Designed and developed modular career training software built to simulate and grade any conversation. It is highly functional tool built to objectively assess and improve dialogue and professional interaction.',
   },
   {
+    title: "Where's My Rig",
+    subtitle: 'wheresmyrig.com',
+    link: 'https://wheresmyrig.com',
+    description:
+      'A GeoGuessr-style game for truck simulator fans. Guess real in-game locations from Euro Truck Simulator 2 and American Truck Simulator screenshots. Built with React, Cloudflare Workers, D1, and R2 with community screenshot submissions and a competitive leaderboard.',
+  },
+  {
     title: 'TidalHudson',
     subtitle: 'UN Millennium Fellowship',
     link: null,
