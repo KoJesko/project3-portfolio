@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-function Navbar() {
+function Navbar({ theme, onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLinkClick = () => {
@@ -22,13 +22,24 @@ function Navbar() {
           AK<span className="accent">.</span>
         </a>
         <button
+          type="button"
           className={`navbar-toggle ${menuOpen ? 'active' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
         >
           <span></span>
           <span></span>
           <span></span>
+        </button>
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={onToggleTheme}
+          aria-label={`Switch theme (current: ${theme})`}
+          title="Switch theme"
+        >
+          Theme: {theme}
         </button>
         <ul className={`navbar-links ${menuOpen ? 'open' : ''}`}>
           {navLinks.map((link) => (
