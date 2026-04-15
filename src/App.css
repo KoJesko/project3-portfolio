@@ -76,6 +76,7 @@ body {
   padding-bottom: 80px;
   position: relative;
   z-index: 0;
+  isolation: isolate;
 }
 
 .container {
