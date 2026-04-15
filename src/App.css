@@ -270,19 +270,8 @@ body {
 }
 
 .section-header {
-  position: sticky;
-  top: 80px;
   text-align: center;
-  background: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
-  backdrop-filter: blur(5px);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 12px;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 60px;
-  z-index: 5;
 }
 
 .section-header h2 {
@@ -728,10 +717,6 @@ body {
   .theme-toggle {
     margin-left: auto;
     margin-right: 10px;
-  }
-
-  .section-header {
-    top: 72px;
   }
 
   .section {
