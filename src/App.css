@@ -74,6 +74,8 @@ body {
 .app-shell main {
   flex: 1;
   padding-bottom: 80px;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
