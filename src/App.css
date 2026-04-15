@@ -622,10 +622,19 @@ body {
 }
 
 .sticky-footer {
-  position: sticky;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   background: color-mix(in srgb, var(--bg-primary) 95%, transparent);
   backdrop-filter: blur(8px);
+  z-index: 900;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.sticky-footer.hidden {
+  transform: translateY(100%);
 }
 
 .footer p {
@@ -671,6 +680,7 @@ body {
 
 .egg-player {
   width: 100%;
+  aspect-ratio: 9 / 16;
   border: 1px solid var(--border);
   border-radius: 12px;
 }
@@ -729,6 +739,6 @@ body {
   }
 
   .sticky-footer {
-    position: static;
+    position: fixed;
   }
 }

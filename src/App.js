@@ -11,7 +11,7 @@ import './App.css';
 
 const THEMES = ['dark', 'light', 'sunset'];
 const EASTER_EGG_KEY = '236';
-const EASTER_EGG_VIDEO = 'file:///C:/Users/jansh.ARI-LENOV/OneDrive/Downloads/I%20Let%20Him%20Pass,%20He%20Let%20Me%20Crash%20%20%23truckersmp%20%23ets2%20%23eurotrucksimulator2.mp4';
+const EASTER_EGG_VIDEO = 'https://www.youtube.com/embed/VS97-X0CjZ4?autoplay=1';
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
@@ -91,13 +91,14 @@ function App() {
             >
               Close
             </button>
-            <video
+            <iframe
               key={videoKey}
               className="egg-player"
               src={EASTER_EGG_VIDEO}
-              controls
-              autoPlay
-              onEnded={() => setShowEasterEgg(false)}
+              title="Easter egg"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              frameBorder="0"
             />
           </div>
         </div>
