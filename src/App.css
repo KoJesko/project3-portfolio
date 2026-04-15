@@ -272,7 +272,7 @@ body {
 
 .section-header {
   position: static;
-  z-index: auto;
+  z-index: 1;
   top: auto;
   text-align: center;
   margin-bottom: 60px;
