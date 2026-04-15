@@ -74,6 +74,8 @@ body {
 .app-shell main {
   flex: 1;
   padding-bottom: 80px;
+  position: relative;
+  z-index: 0;
 }
 
 .container {
@@ -263,8 +265,6 @@ body {
 /* ─── Sections ─── */
 
 .section {
-  position: relative;
-  z-index: 0;
   padding: 100px 0;
 }
 
