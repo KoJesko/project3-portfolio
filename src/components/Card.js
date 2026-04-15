@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Card({ title, subtitle, children }) {
+function Card({ title, subtitle, children, className = '' }) {
   return (
-    <div className="card">
+    <div className={`card ${className}`.trim()}>
       {title && <h3 className="card-title">{title}</h3>}
       {subtitle && <p className="card-subtitle">{subtitle}</p>}
       <div className="card-body">{children}</div>
