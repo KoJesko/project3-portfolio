@@ -271,11 +271,12 @@ body {
 }
 
 .section-header {
-  position: static !important;
-  z-index: auto !important;
-  top: auto !important;
+  position: static;
+  z-index: auto;
+  top: auto;
   text-align: center;
   margin-bottom: 60px;
+
 }
 
 .section-header h2 {
