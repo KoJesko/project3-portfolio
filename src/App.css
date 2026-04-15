@@ -74,9 +74,6 @@ body {
 .app-shell main {
   flex: 1;
   padding-bottom: 80px;
-  position: relative;
-  z-index: 0;
-  isolation: isolate;
 }
 
 .container {
@@ -619,10 +616,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: color-mix(in srgb, var(--bg-primary) 95%, transparent);
-  backdrop-filter: blur(8px);
-  z-index: 1500;
-  transform: translateY(0);
+  background: var(--bg-primary);
+  z-index: 2147483647;
   transition: transform 0.3s ease;
 }
 
