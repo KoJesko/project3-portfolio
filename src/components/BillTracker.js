@@ -13,8 +13,8 @@ const bills = [
     url: 'https://www.nysenate.gov/legislation/bills/2025/S8102/amendment/A',
   },
   {
-    id: 'AB8803',
-    name: 'Assembly Bill AB8803',
+    id: 'A08893',
+    name: 'Assembly Bill A08893',
     type: 'Assembly',
     description: 'Proposed restrictions on GPL and copyleft licensing',
     status: 'Pending Review',
