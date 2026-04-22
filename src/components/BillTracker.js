@@ -10,15 +10,17 @@ const bills = [
     status: 'Pending Review',
     statusColor: '#ff9e4a',
     impact: 'HIGH',
+    url: 'https://www.nysenate.gov/legislation/bills/2025/S8102/amendment/A',
   },
   {
-    id: 'AB8803',
-    name: 'Assembly Bill AB8803',
+    id: 'A08893',
+    name: 'Assembly Bill A08893',
     type: 'Assembly',
     description: 'Proposed restrictions on GPL and copyleft licensing',
     status: 'Pending Review',
     statusColor: '#ff9e4a',
     impact: 'HIGH',
+    url: 'https://assembly.state.ny.us/leg/?bn=A.8893',
   },
 ];
 
@@ -114,7 +116,7 @@ function BillTracker() {
                 <span className={`impact-badge impact-${bill.impact.toLowerCase()}`}>{bill.impact}</span>
               </div>
               <a
-                href={`https://www.nysenate.gov/legislation/bills/${bill.id}`}
+                href={bill.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bill-link"

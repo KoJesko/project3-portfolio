@@ -59,7 +59,7 @@ function GitHubRepos({ searchTerm }) {
     const fetchRepos = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://api.github.com/user/repos?sort=updated&per_page=12&type=public', {
+        const response = await fetch('https://api.github.com/users/KoJesko/repos?sort=updated&per_page=12&type=public', {
           headers: {
             'Accept': 'application/vnd.github.v3+json',
           },
