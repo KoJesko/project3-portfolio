@@ -62,7 +62,7 @@ const implications = [
 ];
 
 function BillTracker() {
-  const [billDetails, setBillDetails] = useState(bills);
+  const [billDetails] = useState(bills);
 
   useEffect(() => {
     // Fetch bill status from NY Legislature API if available
