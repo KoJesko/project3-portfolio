@@ -5,6 +5,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import GitHubRepos from './components/GitHubRepos';
+import BillTracker from './components/BillTracker';
 import Pride from './components/Pride';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -121,6 +122,7 @@ function App() {
         <Skills searchTerm={searchTerm} />
         <Projects searchTerm={searchTerm} />
         <GitHubRepos searchTerm={searchTerm} />
+        <BillTracker />
         <Pride />
         <Contact />
       </main>

@@ -974,3 +974,254 @@ mark {
   color: var(--text-secondary);
   font-size: 1.1rem;
 }
+
+/* ─── Bill Tracker Section ─── */
+
+.bill-tracker {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--bg-secondary) 40%, transparent),
+    color-mix(in srgb, var(--accent) 5%, transparent)
+  );
+}
+
+.bill-warning {
+  background: color-mix(in srgb, #ff9e4a 10%, transparent);
+  border-left: 4px solid #ff9e4a;
+  padding: 16px 20px;
+  border-radius: 4px;
+  margin-bottom: 32px;
+  color: var(--text-primary);
+}
+
+.bill-warning p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.bills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.bill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.bill-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(54, 212, 153, 0.1);
+  transform: translateY(-2px);
+}
+
+.bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.bill-header h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.bill-type {
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bill-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.bill-status,
+.bill-impact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.status-label,
+.impact-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.status-badge,
+.impact-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid;
+}
+
+.impact-badge {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.impact-high {
+  background: color-mix(in srgb, #ff6b6b 15%, transparent);
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.bill-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.bill-link:hover {
+  gap: 4px;
+  transform: translateX(2px);
+}
+
+.implications-section {
+  background: color-mix(in srgb, var(--bg-secondary) 50%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.implications-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.implications-intro {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.implications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.implication-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.implication-card:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--bg-card) 90%, var(--accent));
+}
+
+.implication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.implication-header h4 {
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin: 0;
+  flex: 1;
+}
+
+.severity-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.severity-critical {
+  background: color-mix(in srgb, #ff6b6b 20%, transparent);
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.severity-high {
+  background: color-mix(in srgb, #ffa940 20%, transparent);
+  color: #ffa940;
+  border: 1px solid #ffa940;
+}
+
+.implication-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bill-action-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.bill-action-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.action-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action-list li {
+  padding: 12px 0;
+  padding-left: 8px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.action-list li:last-child {
+  border-bottom: none;
+}
+
+.action-list li:hover {
+  color: var(--accent);
+  padding-left: 12px;
+  transition: all 0.2s ease;
+}
