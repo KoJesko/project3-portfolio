@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import GitHubRepos from './components/GitHubRepos';
 import Pride from './components/Pride';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -29,6 +30,7 @@ function loadYTApi() {
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
+  const [searchTerm, setSearchTerm] = useState('');
   const typedKeysRef = useRef('');
   const playerRef = useRef(null);
   const containerRef = useRef(null);
@@ -112,12 +114,13 @@ function App() {
 
   return (
     <div className="App app-shell">
-      <Navbar theme={theme} onToggleTheme={handleThemeToggle} />
+      <Navbar theme={theme} onToggleTheme={handleThemeToggle} onSearch={setSearchTerm} searchTerm={searchTerm} />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
+        <About searchTerm={searchTerm} />
+        <Skills searchTerm={searchTerm} />
+        <Projects searchTerm={searchTerm} />
+        <GitHubRepos searchTerm={searchTerm} />
         <Pride />
         <Contact />
       </main>

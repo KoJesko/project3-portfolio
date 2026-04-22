@@ -8,11 +8,15 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-function Navbar({ theme, onToggleTheme }) {
+function Navbar({ theme, onToggleTheme, onSearch, searchTerm }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLinkClick = () => {
     setMenuOpen(false);
+  };
+
+  const handleSearchChange = (e) => {
+    onSearch(e.target.value);
   };
 
   return (
@@ -32,6 +36,16 @@ function Navbar({ theme, onToggleTheme }) {
           <span></span>
           <span></span>
         </button>
+        <div className="navbar-search">
+          <input
+            type="search"
+            className="navbar-search-input"
+            placeholder="Search portfolio..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            aria-label="Search portfolio"
+          />
+        </div>
         <button
           type="button"
           className="theme-toggle"

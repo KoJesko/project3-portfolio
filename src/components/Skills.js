@@ -38,7 +38,7 @@ const skillCategories = [
   },
 ];
 
-function Skills() {
+function Skills({ searchTerm }) {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState('All');
 
@@ -50,8 +50,17 @@ function Skills() {
     return ['All', ...Array.from(tagSet)];
   }, []);
 
+  const highlightText = (text, search) => {
+    if (!search.trim()) return text;
+    const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.split(regex).map((part, i) =>
+      regex.test(part) ? `<mark>${part}</mark>` : part
+    ).join('');
+  };
+
+  const combinedSearch = searchTerm || query;
   const filteredSkills = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+    const normalizedQuery = combinedSearch.trim().toLowerCase();
 
     return skillCategories.filter((category) => {
       const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
@@ -62,7 +71,7 @@ function Skills() {
 
       return matchesTag && matchesText;
     });
-  }, [activeTag, query]);
+  }, [activeTag, combinedSearch]);
 
   return (
     <section id="skills" className="section skills">
@@ -91,10 +100,10 @@ function Skills() {
         </div>
         <div className="skills-grid">
           {filteredSkills.map((category) => (
-            <Card key={category.title} title={category.title} className="interactive-card">
+            <Card key={category.title} title={highlightText(category.title, combinedSearch)} className="interactive-card">
               <ul className="skill-list">
                 {category.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} dangerouslySetInnerHTML={{ __html: highlightText(item, combinedSearch) }} />
                 ))}
               </ul>
               <div className="skill-tag-list" aria-label="Category tags">

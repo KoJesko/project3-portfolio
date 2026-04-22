@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({ href, children, variant = 'primary', onClick }) {
+function Button({ href, children, variant = 'primary', onClick, target }) {
   const className = `btn btn-${variant}`;
 
   const isExternal = href && !href.startsWith('#') && !href.startsWith('/');
@@ -10,7 +10,7 @@ function Button({ href, children, variant = 'primary', onClick }) {
       <a
         href={href}
         className={className}
-        target={isExternal ? '_blank' : undefined}
+        target={target || (isExternal ? '_blank' : undefined)}
         rel={isExternal ? 'noopener noreferrer' : undefined}
       >
         {children}
@@ -19,7 +19,7 @@ function Button({ href, children, variant = 'primary', onClick }) {
   }
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} type="button">
       {children}
     </button>
   );
