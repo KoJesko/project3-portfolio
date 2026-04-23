@@ -19,7 +19,7 @@ const trophies = [
     title: 'Virtual Operations & Management',
     easterNote: 'Convoy routes optimized, no pileups.',
     description:
-      'Handled human resources, server announcements, and convoy logistics for Prime Logistics VTC, managing real people in a simulated, highly structured environment.',
+      'Handled human resources, server order, and convoy logistics for Prime Logistics VTC, managing real people in a simulated, highly structured environment.',
   },
   {
     title: 'Unchallenged Records',
