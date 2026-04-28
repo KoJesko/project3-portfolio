@@ -41,6 +41,7 @@ const skillCategories = [
 function Skills() {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState('All');
+  const normalizedQuery = query.trim().toLowerCase();
 
   const tags = useMemo(() => {
     const tagSet = new Set();
@@ -60,10 +61,15 @@ function Skills() {
     ).join('');
   };
 
-  const filteredSkills = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-
+  const tagFilteredSkills = useMemo(() => {
     return skillCategories.filter((category) => {
+      const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
+      return matchesTag;
+    });
+  }, [activeTag]);
+
+  const filteredSkills = useMemo(() => {
+    return tagFilteredSkills.filter((category) => {
       const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
       const matchesText =
         normalizedQuery.length === 0 ||
@@ -72,7 +78,10 @@ function Skills() {
 
       return matchesTag && matchesText;
     });
-  }, [activeTag, query]);
+  }, [activeTag, normalizedQuery, tagFilteredSkills]);
+
+  const noSearchResults = normalizedQuery.length > 0 && filteredSkills.length === 0;
+  const visibleSkills = noSearchResults ? tagFilteredSkills : filteredSkills;
 
   return (
     <section id="skills" className="section skills">
@@ -100,7 +109,7 @@ function Skills() {
           </div>
         </div>
         <div className="skills-grid">
-          {filteredSkills.map((category) => (
+          {visibleSkills.map((category) => (
             <Card key={category.title} title={highlightText(category.title, query)} className="interactive-card">
               <ul className="skill-list">
                 {category.items.map((item) => (
@@ -117,8 +126,8 @@ function Skills() {
             </Card>
           ))}
         </div>
-        {filteredSkills.length === 0 && (
-          <p className="filter-empty">No skills match your current filter.</p>
+        {noSearchResults && (
+          <p className="filter-empty">No skills match that search. Showing available skills for this tag.</p>
         )}
       </div>
     </section>
