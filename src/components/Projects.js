@@ -30,7 +30,7 @@ const projects = [
   },
 ];
 
-function Projects({ searchTerm = '' }) {
+function Projects() {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState('All');
 
@@ -42,9 +42,8 @@ function Projects({ searchTerm = '' }) {
     return ['All', ...Array.from(tagSet)];
   }, []);
 
-  const combinedSearch = searchTerm || query;
   const filteredProjects = useMemo(() => {
-    const normalizedQuery = combinedSearch.trim().toLowerCase();
+    const normalizedQuery = query.trim().toLowerCase();
 
     return projects.filter((project) => {
       const matchesTag = activeTag === 'All' || project.tags.includes(activeTag);
@@ -57,7 +56,7 @@ function Projects({ searchTerm = '' }) {
 
       return matchesTag && matchesText;
     });
-  }, [activeTag, combinedSearch]);
+  }, [activeTag, query]);
 
   return (
     <section id="projects" className="section projects">

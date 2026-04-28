@@ -31,7 +31,6 @@ function loadYTApi() {
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'sunset');
-  const [searchTerm, setSearchTerm] = useState('');
   const typedKeysRef = useRef('');
   const playerRef = useRef(null);
   const containerRef = useRef(null);
@@ -115,13 +114,13 @@ function App() {
 
   return (
     <div className="App app-shell">
-      <Navbar theme={theme} onToggleTheme={handleThemeToggle} onSearch={setSearchTerm} searchTerm={searchTerm} />
+      <Navbar theme={theme} onToggleTheme={handleThemeToggle} />
       <main>
         <Hero />
-        <About searchTerm={searchTerm} />
-        <Skills searchTerm={searchTerm} />
-        <Projects searchTerm={searchTerm} />
-        <GitHubRepos searchTerm={searchTerm} />
+        <About />
+        <Skills />
+        <Projects />
+        <GitHubRepos />
         <BillTracker />
         <Pride />
         <Contact />

@@ -47,7 +47,7 @@ function RepoModal({ repo, isOpen, onClose }) {
   );
 }
 
-function GitHubRepos({ searchTerm }) {
+function GitHubRepos() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -99,17 +99,6 @@ function GitHubRepos({ searchTerm }) {
     });
   }, [repos, repoSearchTerm, repoLanguageFilter]);
 
-  const globalSearchMatch = useMemo(() => {
-    if (!searchTerm.trim()) return filteredRepos;
-    const term = searchTerm.toLowerCase();
-    return filteredRepos.filter(
-      (repo) =>
-        repo.name.toLowerCase().includes(term) ||
-        (repo.description && repo.description.toLowerCase().includes(term)) ||
-        (repo.language && repo.language.toLowerCase().includes(term))
-    );
-  }, [filteredRepos, searchTerm]);
-
   return (
     <section id="github-repos" className="section github-repos">
       <div className="container">
@@ -149,9 +138,9 @@ function GitHubRepos({ searchTerm }) {
               <div className="loading-message">
                 <p>Loading repositories...</p>
               </div>
-            ) : globalSearchMatch.length > 0 ? (
+            ) : filteredRepos.length > 0 ? (
               <div className="projects-grid">
-                {globalSearchMatch.map((repo) => (
+                {filteredRepos.map((repo) => (
                   <Card
                     key={repo.id}
                     title={repo.name}

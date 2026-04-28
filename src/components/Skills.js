@@ -38,7 +38,7 @@ const skillCategories = [
   },
 ];
 
-function Skills({ searchTerm }) {
+function Skills() {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState('All');
 
@@ -60,9 +60,8 @@ function Skills({ searchTerm }) {
     ).join('');
   };
 
-  const combinedSearch = searchTerm || query;
   const filteredSkills = useMemo(() => {
-    const normalizedQuery = combinedSearch.trim().toLowerCase();
+    const normalizedQuery = query.trim().toLowerCase();
 
     return skillCategories.filter((category) => {
       const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
@@ -73,7 +72,7 @@ function Skills({ searchTerm }) {
 
       return matchesTag && matchesText;
     });
-  }, [activeTag, combinedSearch]);
+  }, [activeTag, query]);
 
   return (
     <section id="skills" className="section skills">
@@ -102,10 +101,10 @@ function Skills({ searchTerm }) {
         </div>
         <div className="skills-grid">
           {filteredSkills.map((category) => (
-            <Card key={category.title} title={highlightText(category.title, combinedSearch)} className="interactive-card">
+            <Card key={category.title} title={highlightText(category.title, query)} className="interactive-card">
               <ul className="skill-list">
                 {category.items.map((item) => (
-                  <li key={item} dangerouslySetInnerHTML={{ __html: highlightText(item, combinedSearch) }} />
+                  <li key={item} dangerouslySetInnerHTML={{ __html: highlightText(item, query) }} />
                 ))}
               </ul>
               <div className="skill-tag-list" aria-label="Category tags">
