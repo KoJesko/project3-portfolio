@@ -46,15 +46,6 @@ function Navbar({ theme, onToggleTheme, onSearch, searchTerm }) {
             aria-label="Search portfolio"
           />
         </div>
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={onToggleTheme}
-          aria-label={`Switch theme (current: ${theme})`}
-          title="Switch theme"
-        >
-          Theme: {theme}
-        </button>
         <ul className={`navbar-links ${menuOpen ? 'open' : ''}`}>
           {navLinks.map((link) => (
             <li key={link.label}>
@@ -64,6 +55,15 @@ function Navbar({ theme, onToggleTheme, onSearch, searchTerm }) {
             </li>
           ))}
         </ul>
+        <button
+          type="button"
+          className="theme-toggle theme-toggle-right"
+          onClick={onToggleTheme}
+          aria-label={`Switch theme (current: ${theme})`}
+          title="Switch theme"
+        >
+          Theme: {theme}
+        </button>
       </div>
     </nav>
   );

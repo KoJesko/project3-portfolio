@@ -52,9 +52,11 @@ function Skills({ searchTerm }) {
 
   const highlightText = (text, search) => {
     if (!search.trim()) return text;
-    const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.split(regex).map((part, i) =>
-      regex.test(part) ? `<mark>${part}</mark>` : part
+    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const splitRegex = new RegExp(`(${escaped})`, 'gi');
+    const matchRegex = new RegExp(`^${escaped}$`, 'i');
+    return text.split(splitRegex).map((part) =>
+      matchRegex.test(part) ? `<mark>${part}</mark>` : part
     ).join('');
   };
 

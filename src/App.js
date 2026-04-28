@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
 
-const THEMES = ['dark', 'light', 'sunset'];
+const THEMES = ['sunset', 'dark', 'light'];
 const EASTER_EGG_KEY = '236';
 const EASTER_EGG_VIDEO_ID = 'VS97-X0CjZ4';
 
@@ -30,7 +30,7 @@ function loadYTApi() {
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'sunset');
   const [searchTerm, setSearchTerm] = useState('');
   const typedKeysRef = useRef('');
   const playerRef = useRef(null);
