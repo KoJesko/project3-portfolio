@@ -51,16 +51,6 @@ function Skills() {
     return ['All', ...Array.from(tagSet)];
   }, []);
 
-  const highlightText = (text, search) => {
-    if (!search.trim()) return text;
-    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const splitRegex = new RegExp(`(${escaped})`, 'gi');
-    const matchRegex = new RegExp(`^${escaped}$`, 'i');
-    return text.split(splitRegex).map((part) =>
-      matchRegex.test(part) ? `<mark>${part}</mark>` : part
-    ).join('');
-  };
-
   const tagFilteredSkills = useMemo(() => {
     return skillCategories.filter((category) => {
       const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
@@ -70,15 +60,14 @@ function Skills() {
 
   const filteredSkills = useMemo(() => {
     return tagFilteredSkills.filter((category) => {
-      const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
       const matchesText =
         normalizedQuery.length === 0 ||
         category.title.toLowerCase().includes(normalizedQuery) ||
         category.items.some((item) => item.toLowerCase().includes(normalizedQuery));
 
-      return matchesTag && matchesText;
+      return matchesText;
     });
-  }, [activeTag, normalizedQuery, tagFilteredSkills]);
+  }, [normalizedQuery, tagFilteredSkills]);
 
   const noSearchResults = normalizedQuery.length > 0 && filteredSkills.length === 0;
   const visibleSkills = noSearchResults ? tagFilteredSkills : filteredSkills;
@@ -110,10 +99,10 @@ function Skills() {
         </div>
         <div className="skills-grid">
           {visibleSkills.map((category) => (
-            <Card key={category.title} title={highlightText(category.title, query)} className="interactive-card">
+            <Card key={category.title} title={category.title} className="interactive-card">
               <ul className="skill-list">
                 {category.items.map((item) => (
-                  <li key={item} dangerouslySetInnerHTML={{ __html: highlightText(item, query) }} />
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
               <div className="skill-tag-list" aria-label="Category tags">
