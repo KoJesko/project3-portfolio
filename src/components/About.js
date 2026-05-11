@@ -19,19 +19,11 @@ const aboutPanels = [
   },
 ];
 
-function About({ searchTerm }) {
+function About() {
   const [openIndex, setOpenIndex] = useState(0);
 
   const handleToggle = (index) => {
     setOpenIndex((prevIndex) => (prevIndex === index ? -1 : index));
-  };
-
-  const highlightText = (text, search) => {
-    if (!search.trim()) return text;
-    const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.split(regex).map((part, i) =>
-      regex.test(part) ? `<mark>${part}</mark>` : part
-    ).join('');
   };
 
   return (
@@ -41,9 +33,6 @@ function About({ searchTerm }) {
         <div className="accordion" role="presentation">
           {aboutPanels.map((panel, index) => {
             const isOpen = openIndex === index;
-            const matchesSearch = !searchTerm.trim() || panel.title.toLowerCase().includes(searchTerm.toLowerCase()) || panel.content.toLowerCase().includes(searchTerm.toLowerCase());
-
-            if (searchTerm.trim() && !matchesSearch) return null;
 
             return (
               <div key={panel.title} className={`accordion-item ${isOpen ? 'open' : ''}`}>
@@ -54,7 +43,7 @@ function About({ searchTerm }) {
                   aria-expanded={isOpen}
                   aria-controls={`about-panel-${index}`}
                 >
-                  <span dangerouslySetInnerHTML={{ __html: highlightText(panel.title, searchTerm) }} />
+                  <span>{panel.title}</span>
                   <span className="accordion-symbol">{isOpen ? '−' : '+'}</span>
                 </button>
                 <div
@@ -62,7 +51,7 @@ function About({ searchTerm }) {
                   className="accordion-panel"
                   hidden={!isOpen}
                 >
-                  <p dangerouslySetInnerHTML={{ __html: highlightText(panel.content, searchTerm) }} />
+                  <p>{panel.content}</p>
                 </div>
               </div>
             );

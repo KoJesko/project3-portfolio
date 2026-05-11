@@ -38,9 +38,10 @@ const skillCategories = [
   },
 ];
 
-function Skills({ searchTerm }) {
+function Skills() {
   const [query, setQuery] = useState('');
   const [activeTag, setActiveTag] = useState('All');
+  const normalizedQuery = query.trim().toLowerCase();
 
   const tags = useMemo(() => {
     const tagSet = new Set();
@@ -50,28 +51,26 @@ function Skills({ searchTerm }) {
     return ['All', ...Array.from(tagSet)];
   }, []);
 
-  const highlightText = (text, search) => {
-    if (!search.trim()) return text;
-    const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.split(regex).map((part, i) =>
-      regex.test(part) ? `<mark>${part}</mark>` : part
-    ).join('');
-  };
-
-  const combinedSearch = searchTerm || query;
-  const filteredSkills = useMemo(() => {
-    const normalizedQuery = combinedSearch.trim().toLowerCase();
-
+  const tagFilteredSkills = useMemo(() => {
     return skillCategories.filter((category) => {
       const matchesTag = activeTag === 'All' || category.tags.includes(activeTag);
+      return matchesTag;
+    });
+  }, [activeTag]);
+
+  const filteredSkills = useMemo(() => {
+    return tagFilteredSkills.filter((category) => {
       const matchesText =
         normalizedQuery.length === 0 ||
         category.title.toLowerCase().includes(normalizedQuery) ||
         category.items.some((item) => item.toLowerCase().includes(normalizedQuery));
 
-      return matchesTag && matchesText;
+      return matchesText;
     });
-  }, [activeTag, combinedSearch]);
+  }, [normalizedQuery, tagFilteredSkills]);
+
+  const noSearchResults = normalizedQuery.length > 0 && filteredSkills.length === 0;
+  const visibleSkills = noSearchResults ? tagFilteredSkills : filteredSkills;
 
   return (
     <section id="skills" className="section skills">
@@ -99,11 +98,11 @@ function Skills({ searchTerm }) {
           </div>
         </div>
         <div className="skills-grid">
-          {filteredSkills.map((category) => (
-            <Card key={category.title} title={highlightText(category.title, combinedSearch)} className="interactive-card">
+          {visibleSkills.map((category) => (
+            <Card key={category.title} title={category.title} className="interactive-card">
               <ul className="skill-list">
                 {category.items.map((item) => (
-                  <li key={item} dangerouslySetInnerHTML={{ __html: highlightText(item, combinedSearch) }} />
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
               <div className="skill-tag-list" aria-label="Category tags">
@@ -116,8 +115,8 @@ function Skills({ searchTerm }) {
             </Card>
           ))}
         </div>
-        {filteredSkills.length === 0 && (
-          <p className="filter-empty">No skills match your current filter.</p>
+        {noSearchResults && (
+          <p className="filter-empty">No skills match that search. Showing available skills for this tag.</p>
         )}
       </div>
     </section>

@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
 
-const THEMES = ['dark', 'light', 'sunset'];
+const THEMES = ['sunset', 'dark', 'light'];
 const EASTER_EGG_KEY = '236';
 const EASTER_EGG_VIDEO_ID = 'VS97-X0CjZ4';
 
@@ -30,8 +30,7 @@ function loadYTApi() {
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'sunset');
   const typedKeysRef = useRef('');
   const playerRef = useRef(null);
   const containerRef = useRef(null);
@@ -115,13 +114,13 @@ function App() {
 
   return (
     <div className="App app-shell">
-      <Navbar theme={theme} onToggleTheme={handleThemeToggle} onSearch={setSearchTerm} searchTerm={searchTerm} />
+      <Navbar theme={theme} onToggleTheme={handleThemeToggle} />
       <main>
         <Hero />
-        <About searchTerm={searchTerm} />
-        <Skills searchTerm={searchTerm} />
-        <Projects searchTerm={searchTerm} />
-        <GitHubRepos searchTerm={searchTerm} />
+        <About />
+        <Skills />
+        <Projects />
+        <GitHubRepos />
         <BillTracker />
         <Pride />
         <Contact />
