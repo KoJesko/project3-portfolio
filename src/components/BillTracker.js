@@ -1,90 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SectionHeader from './SectionHeader';
 
 const bills = [
   {
-    id: 'S8102A',
-    name: 'Senate Bill S8102A',
-    type: 'Senate',
-    description: 'Regulates open-source software licensing and compliance',
-    status: 'Pending Review',
-    statusColor: '#ff9e4a',
-    impact: 'HIGH',
-    url: 'https://www.nysenate.gov/legislation/bills/2025/S8102/amendment/A',
-  },
-  {
     id: 'A08893',
-    name: 'Assembly Bill A08893',
+    name: 'Assembly Bill A.8893',
     type: 'Assembly',
-    description: 'Proposed restrictions on GPL and copyleft licensing',
-    status: 'Pending Review',
+    description:
+      'Sponsored by Asm. Rozic. The "Age Assurance for Internet-Enabled Devices" act would require device manufacturers to detect minor users and broadcast a digital "covered minor" signal to apps, websites, and app stores through an API.',
+    status: 'In Assembly Committee',
     statusColor: '#ff9e4a',
     impact: 'HIGH',
     url: 'https://assembly.state.ny.us/leg/?bn=A.8893',
+  },
+  {
+    id: 'S8102B',
+    name: 'Senate Bill S.8102-B',
+    type: 'Senate',
+    description:
+      'Sponsored by Sen. Gounardes. Would require operating-system providers to run "commercially reasonable" age assurance at device activation and transmit age-category signals (under 13 / 13–15 / 16–17 / 18+) to apps on request. Enforced by the Attorney General with penalties up to $10,000 per violation.',
+    status: 'In Senate Consumer Protection Committee',
+    statusColor: '#ff9e4a',
+    impact: 'HIGH',
+    url: 'https://www.nysenate.gov/legislation/bills/2025/S8102/amendment/B',
   },
 ];
 
 const implications = [
   {
-    issue: 'GPL Restrictions',
+    issue: 'Universal Age Verification',
     description:
-      'Would limit the ability to use and modify GPL-licensed software, which powers Linux development and many critical open-source projects.',
+      'To find the minors, the device or OS has to assess everyone. That pushes toward ID or biometric checks for all users — not just kids — to use your own hardware.',
     severity: 'Critical',
   },
   {
-    issue: 'Developer Freedom',
+    issue: 'Privacy & Surveillance',
     description:
-      'Restricts developers from contributing to open-source projects and sharing code improvements across the community.',
+      'Baking age detection and an age-signal API into the operating system creates a persistent, device-level channel that broadcasts a user’s age category to apps. Even "promptly deleted" age data is new surveillance infrastructure.',
     severity: 'Critical',
   },
   {
-    issue: 'Linux Ecosystem Threat',
+    issue: 'Burden on Open-Source & Alt OSes',
     description:
-      'Linux and most development tools rely on GPL and similar copyleft licenses. These bills would effectively criminalize or heavily restrict their use.',
+      'A "commercially reasonable" age-assurance mandate at the OS layer is trivial for Apple and Google but a heavy or impossible compliance burden for Linux distros, AOSP forks, and small independent operating systems.',
     severity: 'Critical',
   },
   {
-    issue: 'Competitive Disadvantage',
+    issue: 'Device Autonomy & Right to Repair',
     description:
-      'Would give proprietary software companies advantages by restricting free/open alternatives, stifling innovation in NY tech.',
+      'Tying verification to device activation conflicts with users owning and controlling their own hardware, and with the freedom to run the operating system and software you choose.',
     severity: 'High',
   },
   {
-    issue: 'Educational Impact',
+    issue: 'Chilling Effect on Access',
     description:
-      'Computer science education relies on open-source tools and code examples. These restrictions would harm students and learning.',
+      'Device-level age gating tends to over-block lawful content and discourages anonymous, private access to the internet for everyone, not only minors.',
     severity: 'High',
   },
   {
-    issue: 'Community-Driven Development',
+    issue: 'New Data & Security Risk',
     description:
-      'Open-source depends on volunteers and community collaboration. These bills would make that illegal or unfeasible.',
-    severity: 'Critical',
+      'Collecting age and identity signals creates fresh honeypots and attack surface. Age-assurance APIs can leak, be spoofed, or be repurposed for tracking well beyond their stated intent.',
+    severity: 'High',
   },
 ];
 
 function BillTracker() {
-  const [billDetails] = useState(bills);
-
-  useEffect(() => {
-    // Fetch bill status from NY Legislature API if available
-    const fetchBillStatus = async () => {
-      try {
-        // Note: This is a public API endpoint that may or may not be available
-        // If unavailable, we'll use the static data above
-        const response = await fetch('https://api.leginfo.legislature.ca.gov/');
-        if (response.ok) {
-          // Update would go here if API provides data
-        }
-      } catch (error) {
-        // Silently fail and use static data
-        console.log('Bill status API unavailable, using static data');
-      }
-    };
-
-    fetchBillStatus();
-  }, []);
-
   return (
     <section id="bill-tracker" className="section bill-tracker">
       <div className="container">
@@ -92,13 +73,14 @@ function BillTracker() {
 
         <div className="bill-warning">
           <p>
-            ⚠️ <strong>Important:</strong> As a Linux developer and open-source advocate, I'm tracking these bills
-            that could significantly impact free and open-source software development.
+            ⚠️ <strong>Important:</strong> As a FOSS and digital-rights advocate, I&apos;m tracking these NY bills that
+            would mandate device- and OS-level age verification &mdash; raising serious privacy, surveillance, and
+            open-source concerns for <em>all</em> users, not just minors.
           </p>
         </div>
 
         <div className="bills-grid">
-          {billDetails.map((bill) => (
+          {bills.map((bill) => (
             <div key={bill.id} className="bill-card">
               <div className="bill-header">
                 <h3>{bill.name}</h3>
@@ -112,7 +94,7 @@ function BillTracker() {
                 </span>
               </div>
               <div className="bill-impact">
-                <span className="impact-label">Impact on Linux/Open-Source:</span>
+                <span className="impact-label">Privacy &amp; Digital Rights Impact:</span>
                 <span className={`impact-badge impact-${bill.impact.toLowerCase()}`}>{bill.impact}</span>
               </div>
               <a
@@ -128,10 +110,11 @@ function BillTracker() {
         </div>
 
         <div className="implications-section">
-          <h3>Why These Bills Are Harmful to Linux Development</h3>
+          <h3>Why These Bills Raise Digital-Rights Concerns</h3>
           <p className="implications-intro">
-            Linux and the open-source ecosystem depend on collaborative development and copyleft licenses like the
-            GPL. These bills threaten the very foundation of how Linux and countless critical tools are developed:
+            Both bills push age verification down to the device and operating-system layer. Mandating that level of
+            identity-checking infrastructure carries real costs for privacy, user autonomy, and the open-source
+            ecosystem:
           </p>
 
           <div className="implications-grid">
@@ -152,11 +135,11 @@ function BillTracker() {
         <div className="bill-action-section">
           <h3>What You Can Do</h3>
           <ul className="action-list">
-            <li>📧 Contact your NY State representatives about the impact on tech innovation</li>
-            <li>🤝 Support organizations defending open-source rights (EFF, Software Freedom Conservancy, etc.)</li>
-            <li>📢 Spread awareness about how these bills affect developers and the tech community</li>
-            <li>💻 Contribute to open-source projects - every contribution strengthens the community</li>
-            <li>🔗 Share information about the importance of copyleft licenses for software freedom</li>
+            <li>📧 Contact your NY State Assembly member and Senator to voice concerns about device-level age verification</li>
+            <li>🛡️ Support digital-rights groups working on privacy and age-verification policy (EFF, ACLU, Software Freedom Conservancy)</li>
+            <li>📢 Raise awareness that mandatory age assurance affects everyone&apos;s privacy, not just minors</li>
+            <li>🐧 Ask how compliance would even work for Linux, alternative OSes, and independent device makers</li>
+            <li>🔐 Push for privacy-preserving approaches over mandatory identity and biometric checks</li>
           </ul>
         </div>
       </div>
