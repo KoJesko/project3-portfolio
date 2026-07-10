@@ -13,7 +13,7 @@ const trophies = [
     title: 'Calculated Risks',
     easterNote: 'Reads the room in 3 hands or less.',
     description:
-      'I have been playing poker since I was 7 years old and successfully beat adults on the cable box games channel. I know how to read a room, understand the odds, and execute a winning strategy.',
+      'I have been playing poker since I was 7 years old and successfully beat adults on the cable box games channel. I know how to read a room and play the odds.',
   },
   {
     title: 'Virtual Operations & Management',

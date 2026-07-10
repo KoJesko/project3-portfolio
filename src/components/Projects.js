@@ -10,7 +10,7 @@ const projects = [
     link: 'https://intentioned.tech',
     tags: ['React', 'UI', 'Training', 'SaaS'],
     description:
-      'A highly adaptable, logic-driven training platform. Designed and developed modular career training software built to simulate and grade any conversation. It is highly functional tool built to objectively assess and improve dialogue and professional interaction.',
+      'A real-time voice-coaching app for practicing tough conversations out loud. Speech-to-text, an LLM playing the other side of the conversation, and text-to-speech all run locally on your own GPU through one FastAPI backend, which also scores the session afterward on things like clarity and tone.',
   },
   {
     title: "Where's My Rig",
@@ -26,7 +26,7 @@ const projects = [
     link: null,
     tags: ['VR', '3D', 'Education', 'Environment'],
     description:
-      'Engineered a 3D VR visualization demonstrating the exact mechanics of an estuary system. Built as a core contribution to the UN Millennium Fellowship to bridge the gap between complex environmental data and accessible visual learning.',
+      'Engineered a 3D VR visualization demonstrating the exact mechanics of an estuary system. Built as a contribution to the UN Millennium Fellowship, so people can see how the system actually works instead of reading a report about it.',
   },
 ];
 

@@ -30,13 +30,13 @@ const implications = [
   {
     issue: 'Universal Age Verification',
     description:
-      'To find the minors, the device or OS has to assess everyone. That pushes toward ID or biometric checks for all users — not just kids — to use your own hardware.',
+      'To find the minors, the device or OS has to assess everyone. That pushes toward ID or biometric checks for all users, not just kids, just to use your own hardware.',
     severity: 'Critical',
   },
   {
     issue: 'Privacy & Surveillance',
     description:
-      'Baking age detection and an age-signal API into the operating system creates a persistent, device-level channel that broadcasts a user’s age category to apps. Even "promptly deleted" age data is new surveillance infrastructure.',
+      'Baking age detection and an age-signal API into the OS gives every app a way to ask your device how old you are, whenever it wants. Even if the age data itself gets "promptly deleted" after each check, that asking channel sticks around. It’s the channel itself, not the deleted data, that creates the surveillance risk.',
     severity: 'Critical',
   },
   {
@@ -73,9 +73,10 @@ function BillTracker() {
 
         <div className="bill-warning">
           <p>
-            ⚠️ <strong>Important:</strong> As a FOSS and digital-rights advocate, I&apos;m tracking these NY bills that
-            would mandate device- and OS-level age verification &mdash; raising serious privacy, surveillance, and
-            open-source concerns for <em>all</em> users, not just minors.
+            ⚠️ <strong>Important:</strong> As a FOSS and digital-rights advocate, I&apos;m tracking these NY bills.
+            Both would mandate device- and OS-level age verification, which raises privacy and surveillance concerns
+            for <em>all</em> users (not just minors) and creates a compliance headache for open-source operating
+            systems.
           </p>
         </div>
 
@@ -112,9 +113,9 @@ function BillTracker() {
         <div className="implications-section">
           <h3>Why These Bills Raise Digital-Rights Concerns</h3>
           <p className="implications-intro">
-            Both bills push age verification down to the device and operating-system layer. Mandating that level of
-            identity-checking infrastructure carries real costs for privacy, user autonomy, and the open-source
-            ecosystem:
+            Both bills push age verification down to the device and operating-system layer. That kind of
+            identity-checking infrastructure costs something: less privacy, less user autonomy, and a much harder
+            compliance bar for anyone running open-source software.
           </p>
 
           <div className="implications-grid">
@@ -135,11 +136,11 @@ function BillTracker() {
         <div className="bill-action-section">
           <h3>What You Can Do</h3>
           <ul className="action-list">
-            <li>📧 Contact your NY State Assembly member and Senator to voice concerns about device-level age verification</li>
-            <li>🛡️ Support digital-rights groups working on privacy and age-verification policy (EFF, ACLU, Software Freedom Conservancy)</li>
-            <li>📢 Raise awareness that mandatory age assurance affects everyone&apos;s privacy, not just minors</li>
-            <li>🐧 Ask how compliance would even work for Linux, alternative OSes, and independent device makers</li>
-            <li>🔐 Push for privacy-preserving approaches over mandatory identity and biometric checks</li>
+            <li>Contact your NY State Assembly member and Senator and tell them why device-level age verification worries you.</li>
+            <li>Support the groups already fighting this fight: EFF, ACLU, Software Freedom Conservancy.</li>
+            <li>Point out that this affects everyone&apos;s privacy, not just minors.</li>
+            <li>Ask how compliance would even work for Linux, alternative OSes, and independent device makers, because nobody sponsoring these bills has a good answer.</li>
+            <li>Push for privacy-preserving age assurance instead of mandatory ID or biometric checks.</li>
           </ul>
         </div>
       </div>
