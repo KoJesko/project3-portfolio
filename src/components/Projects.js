@@ -28,6 +28,14 @@ const projects = [
     description:
       'Engineered a 3D VR visualization demonstrating the exact mechanics of an estuary system. Built as a contribution to the UN Millennium Fellowship, so people can see how the system actually works instead of reading a report about it.',
   },
+  {
+    title: 'truckvr',
+    subtitle: 'TruckersMP VR for Linux',
+    link: null,
+    tags: ['VR', 'Game', 'Linux', 'Open Source'],
+    description:
+      'Get Euro Truck Simulator 2 and American Truck Simulator running in VR on Linux, streaming to a standalone headset with WiVRn, with or without TruckersMP. One script, both games, no SteamVR.',
+  },
 ];
 
 function Projects() {

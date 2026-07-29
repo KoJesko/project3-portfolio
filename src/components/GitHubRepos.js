@@ -3,6 +3,44 @@ import SectionHeader from './SectionHeader';
 import Card from './Card';
 import Button from './Button';
 
+const README_SUMMARY_LENGTH = 300;
+
+/**
+ * Turns raw README markdown into a short plain-text blurb that can stand in for
+ * a missing GitHub "About" description.
+ *
+ * @param {string} markdown - Raw README contents.
+ * @returns {string} Plain text, at most README_SUMMARY_LENGTH characters.
+ *
+ * TODO(you): implement the cleanup rules. See the notes in chat — the choices
+ * here are what make the blurbs readable instead of a wall of badge syntax.
+ */
+function summarizeReadme(markdown) {
+  return '';
+}
+
+/** The best description we have for a repo: GitHub's own, else the README blurb. */
+function describeRepo(repo) {
+  return repo.description || repo.readmeSummary || '';
+}
+
+/**
+ * Fetches a repo's README and derives a blurb from it. Resolves to null on any
+ * failure — a missing README (404) or a rate-limit response (403) should just
+ * leave the card without a description, never break the grid.
+ */
+async function fetchReadmeSummary(fullName) {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${fullName}/readme`, {
+      headers: { Accept: 'application/vnd.github.raw' },
+    });
+    if (!response.ok) return null;
+    return summarizeReadme(await response.text()) || null;
+  } catch {
+    return null;
+  }
+}
+
 function RepoModal({ repo, isOpen, onClose }) {
   if (!isOpen || !repo) return null;
 
@@ -13,7 +51,7 @@ function RepoModal({ repo, isOpen, onClose }) {
           ×
         </button>
         <h2>{repo.name}</h2>
-        <p className="modal-description">{repo.description || 'No description provided'}</p>
+        <p className="modal-description">{describeRepo(repo) || 'No description provided'}</p>
         <div className="modal-stats">
           <div className="stat">
             <span className="stat-label">Stars:</span>
@@ -51,11 +89,30 @@ function GitHubRepos() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedRepo, setSelectedRepo] = useState(null);
+  const [selectedRepoId, setSelectedRepoId] = useState(null);
   const [repoSearchTerm, setRepoSearchTerm] = useState('');
   const [repoLanguageFilter, setRepoLanguageFilter] = useState('All');
 
   useEffect(() => {
+    let cancelled = false;
+
+    // Repos without a GitHub "About" blurb borrow one from their README. This
+    // runs after the grid is already on screen, so cards never wait on it.
+    const hydrateDescriptions = async (repoList) => {
+      const needsSummary = repoList.filter((repo) => !repo.description);
+      const summaries = await Promise.all(
+        needsSummary.map(async (repo) => [repo.id, await fetchReadmeSummary(repo.full_name)])
+      );
+      if (cancelled) return;
+      const byId = new Map(summaries.filter(([, summary]) => summary));
+      if (byId.size === 0) return;
+      setRepos((current) =>
+        current.map((repo) =>
+          byId.has(repo.id) ? { ...repo, readmeSummary: byId.get(repo.id) } : repo
+        )
+      );
+    };
+
     const fetchRepos = async () => {
       try {
         setLoading(true);
@@ -66,17 +123,25 @@ function GitHubRepos() {
         });
         if (!response.ok) throw new Error('Failed to fetch repositories');
         const data = await response.json();
-        setRepos(data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)));
+        if (cancelled) return;
+        const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        setRepos(sorted);
         setError(null);
+        setLoading(false);
+        hydrateDescriptions(sorted);
       } catch (err) {
+        if (cancelled) return;
         setError(err.message);
         setRepos([]);
-      } finally {
         setLoading(false);
       }
     };
 
     fetchRepos();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const allLanguages = useMemo(() => {
@@ -94,10 +159,17 @@ function GitHubRepos() {
       const matchesSearch =
         normalizedSearch.length === 0 ||
         repo.name.toLowerCase().includes(normalizedSearch) ||
-        (repo.description && repo.description.toLowerCase().includes(normalizedSearch));
+        describeRepo(repo).toLowerCase().includes(normalizedSearch);
       return matchesLanguage && matchesSearch;
     });
   }, [repos, repoSearchTerm, repoLanguageFilter]);
+
+  // Looked up by id rather than held as a snapshot, so an open modal picks up a
+  // README blurb that lands after the user clicked "Details".
+  const selectedRepo = useMemo(
+    () => repos.find((repo) => repo.id === selectedRepoId) || null,
+    [repos, selectedRepoId]
+  );
 
   return (
     <section id="github-repos" className="section github-repos">
@@ -147,7 +219,7 @@ function GitHubRepos() {
                     subtitle={repo.language || 'Multi-language'}
                     className="interactive-card repo-card"
                   >
-                    <p className="repo-description">{repo.description || 'No description'}</p>
+                    <p className="repo-description">{describeRepo(repo) || 'No description'}</p>
                     <div className="repo-stats">
                       <span className="repo-stat">⭐ {repo.stargazers_count}</span>
                       <span className="repo-stat">👁 {repo.watchers_count}</span>
@@ -159,7 +231,7 @@ function GitHubRepos() {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setSelectedRepo(repo)}
+                        onClick={() => setSelectedRepoId(repo.id)}
                         variant="outline"
                       >
                         Details
@@ -175,7 +247,7 @@ function GitHubRepos() {
         )}
       </div>
 
-      <RepoModal repo={selectedRepo} isOpen={!!selectedRepo} onClose={() => setSelectedRepo(null)} />
+      <RepoModal repo={selectedRepo} isOpen={!!selectedRepo} onClose={() => setSelectedRepoId(null)} />
     </section>
   );
 }
