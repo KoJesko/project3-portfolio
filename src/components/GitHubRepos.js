@@ -9,14 +9,34 @@ const README_SUMMARY_LENGTH = 300;
  * Turns raw README markdown into a short plain-text blurb that can stand in for
  * a missing GitHub "About" description.
  *
+ * Headings are dropped outright — the top one is almost always just the repo
+ * name, which the card already shows. Badges and images go too, since a README
+ * that opens with a row of shields.io links would otherwise render as URL soup.
+ *
  * @param {string} markdown - Raw README contents.
  * @returns {string} Plain text, at most README_SUMMARY_LENGTH characters.
- *
- * TODO(you): implement the cleanup rules. See the notes in chat — the choices
- * here are what make the blurbs readable instead of a wall of badge syntax.
  */
 function summarizeReadme(markdown) {
-  return '';
+  const text = markdown
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .split('\n')
+    .filter((line) => !/^\s*#/.test(line))
+    .map((line) => line.replace(/^\s*(?:[>*\-+]+|\d+\.)\s*/, '').trim())
+    .filter(Boolean)
+    .join(' ')
+    .replace(/[*_`~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (text.length <= README_SUMMARY_LENGTH) return text;
+  // Back up to a word boundary so the blurb never ends mid-word.
+  const clipped = text.slice(0, README_SUMMARY_LENGTH);
+  const lastSpace = clipped.lastIndexOf(' ');
+  return `${(lastSpace > 0 ? clipped.slice(0, lastSpace) : clipped).trimEnd()}…`;
 }
 
 /** The best description we have for a repo: GitHub's own, else the README blurb. */
