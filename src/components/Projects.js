@@ -36,6 +36,14 @@ const projects = [
     description:
       'Get Euro Truck Simulator 2 and American Truck Simulator running in VR on Linux, streaming to a standalone headset with WiVRn, with or without TruckersMP. One script, both games, no SteamVR.',
   },
+  {
+    title: 'ProjectedMaps',
+    subtitle: 'The projection follows the task',
+    link: 'https://kojesko.github.io/ProjectedMaps/projection-switching-prototype.html',
+    tags: ['D3', 'Maps', 'Cartography', 'Data Viz'],
+    description:
+      '[IN PROGRESS] A navigation-layer demo for the UN "Correct the Map" resolution. Four map tasks, each drawn in the projection that suits it (Equal Earth, Lambert conic, azimuthal equidistant, gnomonic), with angle and area distortion measured live from each projection\'s Jacobian instead of asserted. One self-contained HTML file, no server.',
+  },
 ];
 
 function Projects() {
