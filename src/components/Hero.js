@@ -8,7 +8,7 @@ function Hero() {
         <p className="hero-greeting">Hi, I'm</p>
         <h1 className="hero-name">Ari Kotler</h1>
         <p className="hero-tagline">
-          Computer Science Senior &bull; FOSS Advocate &bull; Builder
+          Software Engineer &bull; MS CS Student at Pace &bull; FOSS Advocate &bull; Builder
         </p>
         <div className="hero-buttons">
           <Button href="#contact">Get in Touch</Button>

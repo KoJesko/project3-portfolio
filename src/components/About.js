@@ -5,7 +5,12 @@ const aboutPanels = [
   {
     title: 'Background',
     content:
-      'I am a Computer Science Senior at Pace University and a hardline advocate for Free and Open-Source Software (FOSS) and the Right to Repair. I fix my own devices, build custom rigs from the ground up, and configure my environments exactly how I want them.',
+      'I am a software engineer, a Computer Science graduate student at Pace University, and a hardline advocate for Free and Open-Source Software (FOSS) and the Right to Repair. I fix my own devices, build custom rigs from the ground up, and configure my environments exactly how I want them.',
+  },
+  {
+    title: 'Education',
+    content:
+      'MS in Computer Science (online), Pace University, expected August 2027. BS in Computer Science, Pace University, May 2026, magna cum laude.',
   },
   {
     title: 'How I Build',

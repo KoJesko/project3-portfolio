@@ -10,7 +10,7 @@ const projects = [
     link: 'https://intentioned.tech',
     tags: ['React', 'UI', 'Training', 'SaaS'],
     description:
-      'A real-time voice-coaching app for practicing tough conversations out loud. Speech-to-text, an LLM playing the other side of the conversation, and text-to-speech all run locally on your own GPU through one FastAPI backend, which also scores the session afterward on things like clarity and tone.',
+      '[ACTIVE] A real-time voice-coaching app for practicing tough conversations out loud. Speech-to-text, an LLM playing the other side of the conversation, and text-to-speech all run locally on your own GPU through one FastAPI backend, which also scores the session afterward on things like clarity and tone.',
   },
   {
     title: "Where's My Rig",
@@ -19,6 +19,15 @@ const projects = [
     tags: ['React', 'Cloudflare', 'Game', 'Leaderboard'],
     description:
       '[ALPHA] A GeoGuessr-style game for truck simulator fans. Guess real in-game locations from Euro Truck Simulator 2 and American Truck Simulator screenshots. Built with React, Cloudflare Workers, D1, and R2 with community screenshot submissions and a competitive leaderboard.',
+  },
+  {
+    title: 'PlasmaTrack',
+    subtitle: 'ETS2/ATS job tracker',
+    link: 'https://github.com/KoJesko/PlasmaTrack-Dev',
+    linkLabel: 'View on GitHub',
+    tags: ['C++', 'Rust', 'Cloudflare', 'Game'],
+    description:
+      '[BETA] A job tracker for Euro Truck Simulator 2 and American Truck Simulator. A C++ plugin built on the SCS Telemetry SDK streams telemetry to a background Rust client, which logs it locally and uploads it. A Cloudflare Workers server rebuilds and scores each job with server-side anti-cheat checks, and a Discord bot is the player and moderator interface.',
   },
   {
     title: 'TidalHudson',
@@ -117,7 +126,7 @@ function Projects() {
               </div>
               {project.link && (
                 <Button href={project.link} variant="outline">
-                  Visit Site
+                  {project.linkLabel || 'Visit Site'}
                 </Button>
               )}
               <p className="hover-note">Hover card for lift effect</p>

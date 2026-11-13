@@ -5,8 +5,8 @@ import Button from './Button';
 const contactLinks = [
   {
     label: 'Email',
-    href: 'mailto:jansherremway@gmail.com',
-    display: 'jansherremway@gmail.com',
+    href: 'mailto:akotler@intentioned.tech',
+    display: 'akotler@intentioned.tech',
     icon: '\u2709',
   },
   {
@@ -44,7 +44,7 @@ function Contact() {
           ))}
         </div>
         <div className="contact-cta">
-          <Button href="mailto:jansherremway@gmail.com">Send Me an Email</Button>
+          <Button href="mailto:akotler@intentioned.tech">Send Me an Email</Button>
         </div>
       </div>
     </section>

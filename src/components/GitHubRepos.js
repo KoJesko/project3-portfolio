@@ -4,6 +4,9 @@ import Card from './Card';
 import Button from './Button';
 
 const README_SUMMARY_LENGTH = 300;
+const REPO_LIMIT = 12;
+// Public repos that never shipped and shouldn't appear on the portfolio.
+const HIDDEN_REPOS = new Set(['pointstreak-discord-bot', 'pointstreak-bot']);
 
 /**
  * Turns raw README markdown into a short plain-text blurb that can stand in for
@@ -136,7 +139,7 @@ function GitHubRepos() {
     const fetchRepos = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://api.github.com/users/KoJesko/repos?sort=updated&per_page=12&type=public', {
+        const response = await fetch(`https://api.github.com/users/KoJesko/repos?sort=updated&per_page=${REPO_LIMIT + HIDDEN_REPOS.size}&type=public`, {
           headers: {
             'Accept': 'application/vnd.github.v3+json',
           },
@@ -144,7 +147,10 @@ function GitHubRepos() {
         if (!response.ok) throw new Error('Failed to fetch repositories');
         const data = await response.json();
         if (cancelled) return;
-        const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        const sorted = data
+          .filter((repo) => !HIDDEN_REPOS.has(repo.name.toLowerCase()))
+          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+          .slice(0, REPO_LIMIT);
         setRepos(sorted);
         setError(null);
         setLoading(false);
