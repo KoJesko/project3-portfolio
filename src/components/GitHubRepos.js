@@ -42,6 +42,16 @@ function summarizeReadme(markdown) {
   return `${(lastSpace > 0 ? clipped.slice(0, lastSpace) : clipped).trimEnd()}…`;
 }
 
+/**
+ * A repo's homepage is free text from the GitHub API, so only link to it when it
+ * is a plain http(s) URL — never a javascript: or data: URL.
+ */
+function safeHomepage(repo) {
+  return typeof repo.homepage === 'string' && /^https?:\/\//i.test(repo.homepage.trim())
+    ? repo.homepage.trim()
+    : null;
+}
+
 /** The best description we have for a repo: GitHub's own, else the README blurb. */
 function describeRepo(repo) {
   return repo.description || repo.readmeSummary || '';
@@ -97,8 +107,8 @@ function RepoModal({ repo, isOpen, onClose }) {
           <Button href={repo.html_url} target="_blank" variant="primary">
             View on GitHub
           </Button>
-          {repo.homepage && (
-            <Button href={repo.homepage} target="_blank" variant="outline">
+          {safeHomepage(repo) && (
+            <Button href={safeHomepage(repo)} target="_blank" variant="outline">
               Visit Site
             </Button>
           )}
