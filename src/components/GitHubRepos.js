@@ -4,7 +4,7 @@ import Card from './Card';
 import Button from './Button';
 
 const README_SUMMARY_LENGTH = 300;
-const REPO_LIMIT = 12;
+const REPO_LIMIT = 300;
 // Public repos that never shipped and shouldn't appear on the portfolio.
 const HIDDEN_REPOS = new Set(['pointstreak-discord-bot', 'pointstreak-bot']);
 
